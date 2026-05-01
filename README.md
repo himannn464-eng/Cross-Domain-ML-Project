@@ -1,112 +1,148 @@
 # Cross-Domain Explainable ML Framework
-### Trustworthy AI for Breast Cancer Histopathology and Phishing Website Detection
 
-This project builds a **unified machine learning framework** across two very different domains: medical image classification and cybersecurity tabular classification. Instead of solving only one dataset problem, the project studies how model behavior, explainability, and robustness transfer across domains using a CNN-based breast cancer detector and a Random Forest-based phishing detector.  
+A trustworthy machine learning project that compares model behavior across **two very different real-world domains**:
 
-## Why this project matters
+- **Breast cancer histopathology image classification**
+- **Phishing website detection**
 
-Most student ML projects stop at accuracy. This project goes further by asking:
+Instead of focusing only on accuracy, this project studies **generalization, explainability, and robustness** across computer vision and cybersecurity tasks in a single unified framework.
 
-- Can one evaluation framework be used across both healthcare and cybersecurity?
-- How reliable are the models under perturbations and real-world noise?
-- Can predictions be explained in a way that humans can trust?
+---
 
-This makes the work more aligned with real production ML, where **trust, robustness, and explainability** matter as much as raw performance. [web:1504][web:1508][cite:1496]
+## Project Overview
 
-## Project highlights
+Most machine learning projects solve one problem in one domain. This project goes beyond that by asking:
 
-- Built a **cross-domain trustworthy ML pipeline** spanning:
-  - Breast cancer histopathology image classification
-  - Phishing website detection from handcrafted URL/security features
-- Used **ResNet50-based CNN** for breast cancer classification on the BreaKHis dataset. [cite:1496]
-- Used **Random Forest** for phishing website detection on a 30-feature phishing dataset. [cite:1496]
-- Integrated explainability methods:
-  - **Grad-CAM / SHAP-style interpretation** for medical images
-  - Feature-level importance analysis for phishing prediction. [cite:1496]
-- Evaluated **robustness under perturbations** instead of reporting only clean-data accuracy. [cite:1496]
+- Can a common evaluation mindset work across **medical imaging** and **cybersecurity**?
+- How do different models behave under **perturbations and noisy conditions**?
+- Can predictions be made more **trustworthy and interpretable**?
 
-## Architecture
+To answer these questions, the project combines:
 
-```text
-Input Data
-│
-├── Breast Histopathology Images (BreaKHis)
-│   ├── Preprocessing
-│   ├── CNN Training (ResNet50)
-│   ├── Prediction
-│   └── Explainability / Robustness Analysis
-│
-└── Phishing Website Features
-    ├── Feature Preprocessing
-    ├── Random Forest Training
-    ├── Prediction
-    └── Feature Importance / Robustness Analysis
-```
+- A **ResNet50-based CNN** for breast cancer image classification
+- A **Random Forest classifier** for phishing website detection
+- Explainability methods to understand predictions
+- Robustness testing to evaluate reliability beyond clean benchmark performance
 
-## Datasets
+This makes the project closer to **real applied ML systems**, where trust and reliability matter as much as raw metrics.
 
-### 1) Breast Cancer Histopathology
-- Dataset: **BreaKHis**
-- Task: Binary breast cancer classification
-- Modality: Histopathology microscopy images. [cite:1496][cite:1497]
+---
 
-### 2) Phishing Website Detection
-- Task: Binary classification of phishing vs legitimate websites
-- Input: 30 engineered website/URL/security features such as `having_IP_Address`, `URL_Length`, `SSLfinal_State`, `Request_URL`, and `Google_Index`. [cite:1496]
+## Why This Project Stands Out
 
-## Models used
+- Solves problems in **two unrelated domains** using a unified ML evaluation perspective
+- Combines **deep learning + classical machine learning** in one repository
+- Focuses on **trustworthy AI**, not just prediction accuracy
+- Includes **interpretability and robustness analysis**
+- Demonstrates practical skills in:
+  - computer vision
+  - tabular machine learning
+  - healthcare AI
+  - cybersecurity analytics
+  - reproducible ML workflows
 
-| Domain | Model | Input Type | Goal |
-|---|---|---|---|
-| Breast Cancer | ResNet50-based CNN | Images | Detect benign vs malignant patterns |
-| Phishing Detection | Random Forest | Tabular features | Detect phishing vs legitimate websites |
+---
 
-This combination shows the ability to work across both **deep learning for vision** and **classical ML for structured security data**, which is valuable for applied ML roles. [cite:1496][web:1504]
+## Domains Covered
 
-## Explainability
+### 1. Breast Cancer Histopathology Detection
+This module classifies breast histopathology images into binary classes using a CNN pipeline based on **ResNet50**.
 
-A major focus of this project is not just prediction, but **interpretable prediction**.
+**Goal:** Detect patterns associated with benign and malignant tissue samples.
 
-### Breast Cancer
-The breast cancer model was analyzed using explainability techniques to identify image regions influencing predictions. Important visual patterns included nuclei density and glandular disruption, helping connect model behavior to medically meaningful structures. [cite:1496]
+**Dataset:** BreaKHis
 
-### Phishing Detection
-The phishing model was interpreted through feature-level importance. Features such as IP usage, URL length, and SSL-related signals were identified as influential for detecting suspicious websites. [cite:1496]
+**Approach:**
+- Image preprocessing and resizing
+- Transfer learning using ResNet50
+- Binary classification pipeline
+- Confidence-based prediction output
 
-## Robustness analysis
+**Explainability focus:**
+- Visual reasoning support using interpretation techniques
+- Important patterns observed include **nuclei density** and **glandular disruption**
 
-To simulate real-world deployment challenges, both models were tested under perturbations and compared against their clean-data performance.
+---
 
-- Breast CNN robustness drop: **7.2%**
-- Phishing RF robustness drop: **5.8%** [cite:1496]
+### 2. Phishing Website Detection
+This module predicts whether a website is **phishing** or **legitimate** using a **Random Forest classifier** trained on handcrafted website and URL-based features.
 
-This analysis is important because a model that performs well only on ideal data is not enough for healthcare or cybersecurity use cases. [cite:1496][web:1504]
+**Goal:** Detect suspicious websites from structured feature inputs.
 
-## Key contributions
+**Input includes 30 phishing-related features such as:**
+- `having_IP_Address`
+- `URL_Length`
+- `SSLfinal_State`
+- `Request_URL`
+- `Google_Index`
+- `Links_pointing_to_page`
 
-- Designed a single comparative framework across **two unrelated domains**
-- Combined **accuracy + explainability + robustness** into one pipeline
-- Demonstrated practical understanding of:
-  - Computer vision
-  - Tabular ML
-  - Trustworthy AI
-  - Evaluation under perturbations
-  - Reproducible experimentation. [cite:1496][web:1506]
+**Approach:**
+- Tabular feature preprocessing
+- Random Forest training
+- Feature-based inference
+- Demo prediction using a full 30-feature sample
 
-## Tech stack
+**Interpretability focus:**
+- Feature importance analysis
+- Strong indicators include **IP address usage**, **URL length**, and **SSL-related signals**
 
-- Python
-- PyTorch
-- TensorFlow / Keras
-- Scikit-learn
-- NumPy
-- Pandas
-- SHAP
-- Grad-CAM
-- Joblib
-- Matplotlib / Seaborn. [cite:1496]
+---
 
-## Repository structure
+## Core Idea
+
+The central contribution of this work is a **cross-domain trustworthy ML framework**.
+
+Rather than treating healthcare and cybersecurity as separate projects, this repository studies how to build and evaluate models under a common framework using:
+
+- prediction performance
+- explainability
+- robustness testing
+- domain-specific interpretation
+
+This creates a more realistic view of how ML models behave in the real world.
+
+---
+
+## Robustness Analysis
+
+A key part of this project is evaluating how models perform when conditions are no longer ideal.
+
+Instead of reporting only clean-data performance, this project also examines how accuracy-related behavior changes under perturbations.
+
+### Observed robustness drops
+- **Breast CNN:** 7.2% performance drop under perturbation
+- **Phishing RF:** 5.8% performance drop under perturbation
+
+This helps assess whether a model is only benchmark-friendly or actually dependable under practical conditions.
+
+---
+
+## Models Used
+
+| Domain | Model | Input Type | Objective |
+|--------|-------|------------|-----------|
+| Breast Cancer Detection | ResNet50-based CNN | Histopathology Images | Binary classification |
+| Phishing Detection | Random Forest | Tabular Website Features | Binary classification |
+
+---
+
+## Tech Stack
+
+- **Python**
+- **PyTorch**
+- **TensorFlow / Keras**
+- **Scikit-learn**
+- **NumPy**
+- **Pandas**
+- **Joblib**
+- **SHAP**
+- **Grad-CAM**
+- **Matplotlib / Seaborn**
+
+---
+
+## Repository Structure
 
 ```text
 Cross-Domain-ML-Project/
@@ -123,7 +159,9 @@ Cross-Domain-ML-Project/
 └── ...
 ```
 
-## How to run
+---
+
+## How to Run
 
 ### 1. Clone the repository
 
@@ -132,7 +170,7 @@ git clone https://github.com/sahkanishk01/Cross-Domain-ML-Project.git
 cd Cross-Domain-ML-Project
 ```
 
-### 2. Create virtual environment
+### 2. Create and activate a virtual environment
 
 ```bash
 python -m venv venv
@@ -151,41 +189,88 @@ pip install -r requirements.txt
 python demo_prediction.py
 ```
 
-## Demo output
+---
 
-The demo script performs:
-- Breast cancer image prediction using a saved CNN model
-- Phishing website prediction using a saved Random Forest model
+## Demo Capabilities
 
-Example outputs may include:
-- `Breast Prediction: benign`
-- Confidence score for breast image prediction
-- Phishing prediction using the 30-feature input sample
+The demo script performs prediction for both domains:
 
-## Business and research impact
+### Breast Cancer Demo
+- Loads the trained breast cancer model
+- Takes a sample histopathology image
+- Outputs:
+  - predicted class
+  - confidence score
 
-This project demonstrates the ability to build ML systems that are not limited to one benchmark or one architecture. It shows readiness for roles involving applied machine learning, computer vision, cybersecurity analytics, healthcare AI, and trustworthy AI research. [web:1504][web:1508][cite:1496]
+### Phishing Demo
+- Loads the trained phishing detection model
+- Uses a 30-feature phishing sample
+- Outputs:
+  - predicted class
+  - phishing/legitimate decision
 
-For recruiters and reviewers, the strongest signal here is not just model training — it is the ability to:
-- frame a problem well,
-- choose domain-appropriate models,
-- evaluate trustworthiness,
-- explain decisions clearly,
-- and build a reusable research pipeline. [web:1504][web:1506]
+---
 
-## Future improvements
+## Example Project Value for Recruiters
 
-- Add Streamlit or Flask web interface for live demo
-- Add model cards and data cards
-- Add adversarial robustness experiments
-- Add CI/CD checks and automated evaluation
-- Export explainability reports for both domains. [web:1508][web:1511]
+This project demonstrates the ability to:
+
+- build ML systems across **multiple domains**
+- work with both **images and structured data**
+- apply both **deep learning and traditional ML**
+- handle **model inference pipelines**
+- think beyond training accuracy by including:
+  - robustness analysis
+  - interpretability
+  - deployment-ready demo prediction
+
+It reflects practical readiness for roles in:
+
+- Machine Learning Engineer
+- Data Scientist
+- Computer Vision Engineer
+- Applied AI Engineer
+- Cybersecurity Analytics / ML roles
+- Healthcare AI research
+
+---
+
+## Key Learning Outcomes
+
+Through this project, the following skills were developed and applied:
+
+- Transfer learning with CNNs
+- Binary classification for medical images
+- Feature-based phishing detection
+- End-to-end ML pipeline design
+- Trustworthy AI concepts
+- Explainability in ML systems
+- Robustness-oriented evaluation
+- Reproducible project structuring
+
+---
+
+## Future Improvements
+
+- Add a **Streamlit or Flask web app** for live predictions
+- Add visual explainability outputs directly in the demo
+- Store model metadata using model cards
+- Add automated evaluation scripts
+- Expand robustness testing with adversarial or noisy inputs
+- Include richer experiment tracking and result dashboards
+
+---
 
 ## Author
 
 **Kanishk Sah**  
-Final Year Project – Cross-Domain Generalization of ML Models
+Final Year Project  
+Cross-Domain Explainable ML Framework
+
+---
 
 ## License
 
-This project is for academic and portfolio use. Add an MIT License if you want others to reuse the code.
+This project is intended for academic, learning, and portfolio purposes.
+
+If you want to make it open for reuse, add an **MIT License** file to the repository.
