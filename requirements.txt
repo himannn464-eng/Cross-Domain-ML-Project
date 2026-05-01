@@ -1,1 +1,16 @@
-
+numpy
+pandas
+matplotlib
+seaborn
+scikit-learn
+joblib
+pillow
+opencv-python
+torch
+torchvision
+tensorflow
+keras
+shap
+tqdm
+vscode
+ipykernel
